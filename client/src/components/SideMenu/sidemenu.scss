@@ -1,0 +1,29 @@
+
+.sidemenu-container{
+    width: 60px;
+    height: 100vh;
+    transition: width 0.3s ease-out;
+    background-color: $secondary-color;
+    display: flex;
+    position: fixed;
+    top: 0;
+
+    .lower{
+        position: absolute;
+        bottom: 0;
+    }
+
+    &:hover{
+        width: 300px;
+
+        .sidemenu-btn-container{
+            width: 280px;
+            h2{
+                opacity: 1;
+            }
+            span{
+                right: 5px;
+            }
+        }
+    }
+}

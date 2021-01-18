@@ -1,6 +1,10 @@
+@import "./styles/general.scss";
+
 .App {
   text-align: center;
 }
+
+button:focus {outline:0;}
 
 .App-logo {
   height: 40vmin;
