@@ -4,23 +4,22 @@ export default function SideMenu(){
     return(
         <aside className="sidemenu-container">
             <div className="upper">
-                
+                <SideMenuButton 
+                    displayTo="Home"
+                    icon="home"
+                    to="/"
+                />
             </div>
             <div className="lower">
                 <SideMenuButton 
-                    displayTo="Sign In"
+                    displayTo="Login"
                     icon="login"
-                    to="/home"
+                    to="/login"
                 />
                 <SideMenuButton 
-                    displayTo="Sign Up"
+                    displayTo="Create Account"
                     icon="person_add"
-                    to="/home"
-                />
-                <SideMenuButton 
-                    displayTo="Settings"
-                    icon="settings"
-                    to="/home"
+                    to="/signup"
                 />
             </div>
         </aside>

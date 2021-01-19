@@ -7,10 +7,15 @@
     display: flex;
     position: fixed;
     top: 0;
+    left: 0;
 
     .lower{
         position: absolute;
         bottom: 0;
+    }
+
+    .upper{
+        margin-top: 10px;
     }
 
     &:hover{

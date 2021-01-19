@@ -5,7 +5,7 @@
 ##### General
 
 * axios
-* react-helmet
+* react-helmet NOTE : get react-helmet-async
 * react-router-dom
 
 ##### Styling
