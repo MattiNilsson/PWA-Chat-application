@@ -1,9 +1,11 @@
 import {Icon} from "@material-ui/core";
 import axios from "axios";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect} from "react";
 import { useParams } from "react-router-dom"; 
 import {AccountContext} from "../../context/context"
 import { URL } from "../../constants/constants";
+
+import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
 
 export default function ChatPage(props){
     const { id } = useParams();
@@ -25,17 +27,14 @@ export default function ChatPage(props){
             .catch(err => console.error(err))
     }, [id])
 
-    const getRoom = async () => {
-
-    }
-
     const sendMessage = (e) => {
         e.preventDefault();
         axios
             .post(URL + "/messages", {
                 message : message,
                 author : context.username,
-                room : [+id]
+                room : [+id],
+                user : [+context.id]
             }, {
                 headers : {
                     'Authorization': "Bearer " + localStorage.getItem("jwt")
@@ -56,11 +55,21 @@ export default function ChatPage(props){
 
     return(
         <div className="chat-container">
-            <h1>{room ? room.users[0].username : ""}</h1>
+            <h1>{room ? room.users[0].username + ", " + room.users[1].username : ""}</h1>
 
             <div className="bouble-container">
                 {room ? room.messages.map((index) => {
-                    return <div key={index.id}>{index.message}</div>
+                    return (
+                    <ChatBouble key={index.id} 
+                    image={
+                        index.author === room.users[0].username ? room.users[0].profilepic.url : room.users[1].profilepic.url
+                    }
+                    self={
+                        index.author === room.users[0].username ? false : true
+                    } 
+                    data={index}
+                    />
+                    )
                 }) : <></>}
             </div>
 

@@ -18,8 +18,8 @@
       "dominant": true
     },
     "messages": {
-      "collection": "message",
-      "via": "room"
+      "via": "room",
+      "collection": "message"
     },
     "title": {
       "type": "string"

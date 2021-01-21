@@ -77,6 +77,10 @@
     "rooms": {
       "via": "users",
       "collection": "room"
+    },
+    "messages": {
+      "via": "user",
+      "collection": "message"
     }
   }
 }

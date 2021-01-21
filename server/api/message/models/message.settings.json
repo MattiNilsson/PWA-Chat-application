@@ -21,8 +21,8 @@
       "type": "datetime"
     },
     "room": {
-      "via": "messages",
-      "model": "room"
+      "model": "room",
+      "via": "messages"
     },
     "image": {
       "model": "file",
@@ -34,6 +34,11 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "messages"
     }
   }
 }
