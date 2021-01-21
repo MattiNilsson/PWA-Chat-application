@@ -12,10 +12,12 @@ export default function HomePage(){
     const [search, setSearch] = useState("");
     const {context} = useContext(AccountContext);
 
+    const completeURL = `${URL}/users?_where[_or][username_contains]=${search}${context ? "&[id_ne]="+context.id : ""}`
+
     useEffect(() => {
         const debounce = setTimeout(() => {
             axios
-            .get(`${URL}/users?_where[_or][username_contains]=${search}${context ? "&[id_ne]="+context.id : ""}`)
+            .get(completeURL)
             .then((res) => {
                 setUsers(res.data);
             })
@@ -25,10 +27,28 @@ export default function HomePage(){
         return () => {
             clearTimeout(debounce);
         }
-    }, [search])
+    }, [completeURL])
 
     const searchInput = (e) => {
         setSearch(e.target.value);
+    }
+
+    if(users.length < 1){
+        return(
+            <div>
+                <h1>Find People to Chat With!</h1>
+                <input type="text" onChange={searchInput} />
+                <div className="hp-items-container">
+                    {   Array(3).fill("lmao").map((i, j) => {
+                        return (
+                            <div className="ghost" key={j}>
+                                <div className="ghost-anim"></div>
+                            </div>
+                        )})
+                    }
+                </div>
+            </div>
+        )
     }
 
     return(

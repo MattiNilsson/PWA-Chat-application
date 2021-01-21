@@ -1,6 +1,6 @@
 import {Icon} from "@material-ui/core";
 import axios from "axios";
-import { useContext, useState, useEffect} from "react";
+import { useContext, useState, useEffect, useRef} from "react";
 import { useParams } from "react-router-dom"; 
 import {AccountContext} from "../../context/context"
 import { URL } from "../../constants/constants";
@@ -12,6 +12,11 @@ export default function ChatPage(props){
     const [message, setMessage] = useState("");
     const [room, setRoom] = useState("");
     const {context} = useContext(AccountContext);
+    const chatRef = useRef(null)
+
+    const scrollToBottom = () => {
+        chatRef.current.scrollIntoView()
+    }
 
     useEffect(() => {
         axios
@@ -21,8 +26,8 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {
-                console.log(res);
                 setRoom(res.data);
+                scrollToBottom();
             })
             .catch(err => console.error(err))
     }, [id])
@@ -41,7 +46,6 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {
-                console.log(res);
                 setMessage("");
             })
             .catch(err => {
@@ -71,6 +75,7 @@ export default function ChatPage(props){
                     />
                     )
                 }) : <></>}
+                <div ref={chatRef}></div>
             </div>
 
             <form className="type-field" onSubmit={sendMessage}>

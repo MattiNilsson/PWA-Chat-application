@@ -28,3 +28,9 @@
         transform: rotate(45deg);
     }
 }
+
+@media(max-width: 900px){
+    .logo-container{
+        display:none;
+    }
+}

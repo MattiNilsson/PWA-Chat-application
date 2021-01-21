@@ -7,11 +7,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $primary-color;
+  background: linear-gradient(180deg, rgba(6,139,151,1) 0%, rgba(11,84,149,1) 100%, rgba(91,187,207,1) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: $white-color;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media(max-width: 600px){
+  body{
+    background: linear-gradient(180deg, rgba(21,38,46,1) 0%, rgba(24,58,74,1) 100%, rgba(91,187,207,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 }

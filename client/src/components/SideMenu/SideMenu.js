@@ -11,26 +11,24 @@ export default function SideMenu(){
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
+        const getRooms = () =>{
+            if(!context) return;
+            axios
+                .get(URL + "/rooms?_where[users_contains]=" + context.id, {
+                    headers : {
+                        'Authorization': "Bearer " + localStorage.getItem("jwt")
+                    }
+                })
+                .then(res => {
+                    setFriends(res.data);
+                })
+                .catch(err => console.error(err))
+        }
+
         getRooms();
     }, [context])
 
-    const getRooms = (e) =>{
-        if(!context) return;
-        axios
-            .get(URL + "/rooms?_where[users_contains]=" + context.id, {
-                headers : {
-                    'Authorization': "Bearer " + localStorage.getItem("jwt")
-                }
-            })
-            .then(res => {
-                console.log(res);
-                setFriends(res.data);
-            })
-            .catch(err => console.error(err))
-    }
-
     const onLogOut = (e) => {
-        console.log("hello?")
         setContext(null);
         localStorage.removeItem("user");
         localStorage.removeItem("jwt");

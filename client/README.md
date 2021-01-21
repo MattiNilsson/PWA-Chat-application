@@ -7,6 +7,7 @@
 * axios
 * react-helmet NOTE : get react-helmet-async
 * react-router-dom
+* react-scroll
 
 ##### Styling
 

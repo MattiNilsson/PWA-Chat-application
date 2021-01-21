@@ -1,7 +1,7 @@
 .chat-container{
     width: calc(40vw - 20px);
     height: 90vh;
-    border-radius: 50px;
+    border-radius: 5px;
     position: absolute;
     top: 5vh;
     background-color: $secondary-color;
@@ -10,7 +10,7 @@
     align-items: center;
 
     h1{
-        z-index: 100;
+        z-index: 50;
         margin: 0;
     }
 
@@ -58,6 +58,7 @@
     .bouble-container{
         display: flex;
         flex-direction: column;
+        min-height: 70%;
         width: 90%;
         margin-bottom: 100px;
         margin-top: 50px;
@@ -81,5 +82,29 @@
             background: darken($primary-color, 5%);
             border-radius: 20px;
         }
+    }
+}
+
+@media(max-width: 1200px){
+    .chat-container{
+        width: calc(60vw - 20px);
+    }
+}
+
+@media(max-width: 900px){
+    .chat-container{
+        width: calc(80vw - 20px);
+    }
+}
+
+@media(max-width: 600px){
+    .chat-container{
+        width: 100vw;
+        height: calc(100vh - 60px);
+        top: 50px;
+    }
+
+    input{
+        margin-bottom: 0;
     }
 }

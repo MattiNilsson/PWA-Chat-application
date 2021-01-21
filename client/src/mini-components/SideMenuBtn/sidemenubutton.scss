@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
-    left: 10px;
+    left: 8px;
     align-items: center;
     border-radius: 20px;
     color: white;
@@ -57,3 +57,67 @@
         border-color: darken($primary-color, 10%);
     }
 }
+
+
+@media(max-width: 600px){
+    .sidemenu-btn-container{
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 3px solid $white-color;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        left: 8px;
+        align-items: center;
+        border-radius: 20px;
+        color: white;
+        overflow: hidden;
+        margin-bottom: 10px;
+        transition: width 0.3s ease-out;
+    
+        &.profile{
+            border: none;
+            background-color: lighten($secondary-color, 10%);
+    
+            .img-cont{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                position: absolute;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                right: 0;
+                img{
+                    width: 50px;
+                }
+            }   
+        }
+    
+        h2{
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            white-space: nowrap;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+        span{
+            position: absolute;
+            right: 5px;
+        }
+    
+        &:hover{
+            transition: 0s linear all;
+            background-color: $hover-color;
+            border-color: $hover-color;
+        }
+    
+        &:active{
+            background-color: darken($primary-color, 10%);
+            border-color: darken($primary-color, 10%);
+        }
+    }
+    
+}   

@@ -1,6 +1,59 @@
 .hp-items-container{
     width: 60vw;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: column;
+
+    .ghost{
+        width: 55vw;
+        height: 70px;
+        background-color: rgba(240, 240, 240, 0.3);
+        position: relative;
+        margin-top: 10px;
+        border-radius: 35px;
+        transition: all 0.2s ease-out;
+        overflow:hidden;
+
+        .ghost-anim{
+            background-color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            width: 55vw;
+            height: 70px;
+            opacity: 1;
+            left: 0;
+            bottom: 0;
+            margin-top: 10px;
+            animation: ghostAnimation 0.5s infinite;
+        }
+
+        @keyframes ghostAnimation {
+            0%{      
+                opacity: 1;
+            }
+            50%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+    }
+
+    @for $i from 1 through 5 {
+        .ghost:nth-child(3n + #{$i}) > .ghost-anim{
+            animation-delay: $i * 0.05s;
+        }
+    }
 }
+
+@media(max-width: 1000px){
+    .hp-items-container{
+        width: 80vw;
+        align-items: center;
+        position: absolute;
+        left: 10vw;
+    }
+}
+
+
+

@@ -68,3 +68,29 @@
         }
     }
 }
+
+@media(max-width: 1000px){
+    .sa-container{
+        width: 80vw;
+
+        &:hover{
+            width: 81vw;
+        }
+    }
+}
+
+@media(max-width: 600px){
+    .sa-container{
+        width: 95vw;
+        background-color: $primary-color;
+        &:hover{
+            width: 95vw;
+        }
+    }
+    h3{
+        display: none;
+    }
+    h2{
+        font-size: 120%;
+    }
+}
