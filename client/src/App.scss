@@ -8,6 +8,14 @@
 
 button:focus {outline:0;}
 
+button{
+  cursor: pointer;
+}
+
+*{
+  box-sizing: border-box;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

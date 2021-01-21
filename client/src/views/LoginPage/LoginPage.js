@@ -1,9 +1,13 @@
 import axios from "axios";
-import {useState} from "react";
+import {useState, useContext} from "react";
+import {Redirect} from "react-router-dom";
+import {AccountContext} from "../../context/context";
 
 import { URL } from "../../constants/constants";
 
 export default function LoginPage(){
+    const {setContext} = useContext(AccountContext);
+
     const [data, setData] = useState({
         username : "",
         password : "",
@@ -25,11 +29,18 @@ export default function LoginPage(){
             .then(res => {
                 localStorage.setItem('jwt', res.data.jwt);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
+                setContext(res.data.user);
                 console.log(res);
             })
             .catch(err => {
                 console.error(err);
             })
+    }
+
+    if(localStorage.getItem("user")){
+        return(
+            <Redirect to="/" />
+        )
     }
 
     return(

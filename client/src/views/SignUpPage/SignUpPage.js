@@ -1,5 +1,6 @@
 import {useState} from "react"
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 import {Icon} from "@material-ui/core";
 
@@ -9,9 +10,18 @@ export default function SignUpPage(props){
     const [data, setData] = useState({
         email : "",
         username : "",
+        firstname : "",
+        lastname : "",
         password : "",
     })
-    const [file, setFile]= useState(false);
+    const [file, setFile] = useState(false);
+    const [success, setSuccess] = useState(false);
+
+    if(success){
+        return(
+            <Redirect to="/login" />
+        )
+    }
 
     const onChangeForm = (e) => {
         let newData = {...data};
@@ -41,7 +51,10 @@ export default function SignUpPage(props){
                 formData.append('field', 'profilepic');
                 return axios.post(URL + "/upload", formData)       
             })
-            .then((res) => console.log(res))
+            .then((res) => {
+                setSuccess(true)
+                console.log(res)
+            })
             .catch(err => console.error(err))
     }
     console.log(file);
@@ -53,6 +66,10 @@ export default function SignUpPage(props){
                 <input onChange={onChangeForm} type="email" id="email"/>
                 <label htmlFor="username">Username</label>
                 <input onChange={onChangeForm} autoComplete="username" type="text" id="username"/>
+                <label htmlFor="firstname">Firstname</label>
+                <input onChange={onChangeForm} autoComplete="firstname" type="text" id="firstname"/>
+                <label htmlFor="firstname">Lastname</label>
+                <input onChange={onChangeForm} autoComplete="lastname" type="text" id="lastname"/>
                 <label htmlFor="email">Password</label>
                 <input onChange={onChangeForm} autoComplete="current-password" type="password" id="password"/>
                 <label 

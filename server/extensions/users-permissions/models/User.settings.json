@@ -59,10 +59,6 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "room": {
-      "model": "room",
-      "via": "users_permissions_users"
-    },
     "profilepic": {
       "model": "file",
       "via": "related",
@@ -71,6 +67,16 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "rooms": {
+      "via": "users",
+      "collection": "room"
     }
   }
 }

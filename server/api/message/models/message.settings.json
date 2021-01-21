@@ -21,8 +21,8 @@
       "type": "datetime"
     },
     "room": {
-      "model": "room",
-      "via": "messages"
+      "via": "messages",
+      "model": "room"
     },
     "image": {
       "model": "file",

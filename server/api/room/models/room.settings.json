@@ -11,14 +11,15 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "users_permissions_users": {
-      "via": "room",
+    "users": {
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "rooms",
+      "dominant": true
     },
     "messages": {
-      "via": "room",
-      "collection": "message"
+      "collection": "message",
+      "via": "room"
     },
     "title": {
       "type": "string"

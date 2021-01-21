@@ -1,0 +1,70 @@
+.sa-container{
+    width: 55vw;
+    height: 70px;
+    background-color: $secondary-color;
+    position: relative;
+    margin-top: 10px;
+    border-radius: 35px;
+    transition: all 0.2s ease-out;
+
+    &:hover{
+        width: 60vw;
+        background-color: $hover-color;
+    }
+
+    .icon-container{
+        position: absolute;
+        right: 10px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        div{
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            border-radius: 50%;
+            margin-left: 10px;
+
+            &:hover{
+                background-color: lighten($hover-color, 5%);
+            }
+        }
+        div span{
+            margin-top: 10px;
+            font-size: 200%;
+            color: white;
+        }
+    }
+
+    .sa-plates{
+        display: flex;
+        align-items: center;
+        height: 70px;
+        margin: 0;
+        position: absolute;
+
+        .image-container{
+            transition: all 0.2s ease-out;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 5px;
+            img{
+                width: 100%;
+    
+            }
+        }
+
+        h2{
+            top: calc(50% - 20px);
+            margin-left: 10px;
+        }
+        h3{
+            margin-left: 20px;
+            top: calc(50% - 20px);
+            color: rgb(206, 206, 206);
+        }
+    }
+}

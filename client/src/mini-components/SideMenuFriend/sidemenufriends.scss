@@ -1,4 +1,4 @@
-.sidemenu-btn-container{
+.sidemenu-friend-container{
     width: 40px;
     height: 40px;
     background-color: transparent;
@@ -13,33 +13,30 @@
     overflow: hidden;
     margin-bottom: 10px;
     transition: width 0.3s ease-out;
+     
+    .img-cont{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        position: absolute;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 5px;
 
-    &.profile{
-        border: none;
-        background-color: lighten($secondary-color, 10%);
+        img{
+            width: 50px;
+        }
+    }   
 
-        .img-cont{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            position: absolute;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            right: 0;
-            img{
-                width: 50px;
-            }
-        }   
-    }
 
     h2{
         opacity: 0;
         transition: opacity 0.3s ease-out;
         white-space: nowrap;
         text-decoration: none;
-        margin-left: 5px;
+        margin-left: 30px;
     }
     span{
         position: absolute;
