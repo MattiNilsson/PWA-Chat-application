@@ -36,7 +36,21 @@
     }
 }
 
+.ham{
+    display: none;    
+}
+
 @media(max-width: 600px){
+
+    .ham{
+        display: block;
+        font-size: 120%;
+        border: 3px solid white;
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
 
     .sidemenu-container{
         width: 100vw;
@@ -54,21 +68,52 @@
     
         .lower{
             position: absolute;
-            bottom: 0;
+            display: none;
+        }
+
+        .middle{
+            display: none;
+            position: absolute;
         }
     
         .upper{
-            margin-top: 10px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            width: 100vw;
+            margin-top: 0;
+            padding: 0 5px;
+            position: absolute;
+            top: 0;
+
+            .sidemenu-btn-container{
+                margin: 0;
+                left: 0;
+                h2{
+                    display: none;
+                }
+            }
         }
     
-        &:hover{
-            height: 90vh;
-            width: 100vw;
+        &.hamburger{
+            height: 100vh;
+            width: 100vw !important;
+
+            .lower{
+                display: block;
+                margin-top:100px;
+            }
+
+            .middle{
+                display: block;
+                position: absolute;
+                top: 60px;
+            }
 
             .sidemenu-btn-container, .sidemenu-friend-container{
-                width: 90vw;
+                width: 90vw !important;
+                left: 5vw;
                 h2{
                     opacity: 1;
                 }
@@ -78,10 +123,25 @@
             }
 
             .upper .sidemenu-btn-container{
-                width: 40px;
-
+                width: 40px !important;
+                margin: 0;
+                left: 0;
                 h2{
                     display: none;
+                }
+            }
+        }
+
+        &:hover{
+            width: 100vw;
+        
+            .sidemenu-btn-container, .sidemenu-friend-container{
+                width: 40px;
+                h2{
+                    opacity: 1;
+                }
+                span{
+                    right: 5px;
                 }
             }
         }

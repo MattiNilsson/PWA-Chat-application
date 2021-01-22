@@ -1,5 +1,5 @@
 .log-container{
-    width: 30vw;
+    width: 40vw;
     margin-top: 100px;
     background-color: $secondary-color;
     border-radius: 20px;
@@ -51,6 +51,27 @@
 
             &:active{
                 background-color: darken($primary-color, 10%);
+            }
+        }
+    }
+}
+
+@media(max-width : 1000px){
+    .log-container{
+        width: 70vw;
+    }
+}
+
+@media(max-width : 600px){
+    .log-container{
+        width: 90vw;
+        border: 2px solid white;
+
+        form{
+            width: 90%;
+            padding: 10px;
+            input{
+                width: 90%;
             }
         }
     }

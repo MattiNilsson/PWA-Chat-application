@@ -35,7 +35,7 @@ export default function HomePage(){
 
     if(users.length < 1){
         return(
-            <div>
+            <div className="mt-lmao">
                 <h1>Find People to Chat With!</h1>
                 <input type="text" onChange={searchInput} />
                 <div className="hp-items-container">
@@ -52,7 +52,7 @@ export default function HomePage(){
     }
 
     return(
-        <div>
+        <div className="mt-lmao">
             <h1>Find People to Chat With!</h1>
             <input type="text" onChange={searchInput} />
             <div className="hp-items-container">

@@ -100,11 +100,22 @@
 @media(max-width: 600px){
     .chat-container{
         width: 100vw;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 50px);
         top: 50px;
-    }
 
-    input{
-        margin-bottom: 0;
+        h1{
+            font-size: 120%;
+            background-color: $hover-color;
+            padding: 4px;
+            width: 100%;
+        }
+    
+        input{
+            margin-bottom: 0;
+        }
+    
+        .bouble-container{
+            margin-top: 5px !important;
+        }
     }
 }

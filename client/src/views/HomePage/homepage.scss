@@ -52,6 +52,17 @@
         align-items: center;
         position: absolute;
         left: 10vw;
+
+        .ghost{
+            width: 80vw;
+            .ghost-anim{
+                width: 80vw;
+            }
+        }
+    }
+
+    .mt-lmao{
+        margin-top: 50px;
     }
 }
 
