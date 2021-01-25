@@ -1,0 +1,53 @@
+.landing-card{
+    width: 20vw;
+    background-color: white;
+    color: $black-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 10px;
+
+    .ball{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-top: 20px;
+        background-color: $secondary-color;
+        span{
+            margin-top: 19px;
+            margin-right: 3px;
+            font-size: 400%;
+            color: white;
+        }
+    }
+
+    p{
+        padding: 20px;
+        margin-bottom: 50px;
+    }
+
+    a{
+        position: absolute;
+        bottom: 0;
+        width: 80%;
+    }
+    button{
+        width: 100%;
+    }
+}
+
+
+@media(max-width: 1000px){
+    .landing-card{
+        width: 45%;
+    }
+}
+
+@media(max-width: 600px){
+    .landing-card{
+        width: 100%;
+    }
+}

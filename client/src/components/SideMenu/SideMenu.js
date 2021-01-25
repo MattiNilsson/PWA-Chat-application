@@ -58,7 +58,7 @@ export default function SideMenu(){
                     <SideMenuButton 
                         displayTo={context ? context.username : ""}
                         icon="home"
-                        to={"/Account/" + context.id}
+                        to={"/profile/" + context.id}
                         profile={context ? context.profilepic.url : ""}
                         setCloseHam={setHamburger}
                     />

@@ -40,7 +40,7 @@ export default function SearchAvatar(props){
                 <h3>( {username} )</h3>
             </div>
             <div className="icon-container">
-                <Link to={`/users/${id}`} aria-label="user"><div><Icon>account_circle</Icon></div></Link>
+                <Link to={`/profile/${id}`} aria-label="user"><div><Icon>account_circle</Icon></div></Link>
                 <div onClick={createChatRoom}><Icon>message</Icon></div>
             </div>
         </div>

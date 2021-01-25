@@ -10,6 +10,8 @@ import HomePage from "./views/HomePage/HomePage";
 import SignUpPage from "./views/SignUpPage/SignUpPage";
 import LoginPage from './views/LoginPage/LoginPage';
 import ChatPage from "./views/ChatPage/ChatPage";
+import LandingPage from "./views/LandingPage/LandingPage";
+import ProfilePage from "./views/ProfilePage/ProfilePage";
 
 // Components
 import SideMenu from "./components/SideMenu/SideMenu";
@@ -33,10 +35,12 @@ function App() {
                     <SideMenu />
                     <LogoIcon />
                     <Switch>
-                        <Route path="/" exact component={HomePage} />
+                        <Route path="/" exact component={LandingPage} />
+                        <Route path="/home" component={HomePage} />
                         <Route path="/signup" component={SignUpPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/room/:id" component={ChatPage} />
+                        <Route path="/profile/:id" component={ProfilePage} />
                     </Switch>
                 </Router>
             </AccountContext.Provider>

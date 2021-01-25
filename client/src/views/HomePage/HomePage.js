@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 
 import {URL} from "../../constants/constants";
 
@@ -31,6 +32,10 @@ export default function HomePage(){
 
     const searchInput = (e) => {
         setSearch(e.target.value);
+    }
+
+    if(!context){
+        return <Redirect to="/" />
     }
 
     if(users.length < 1){
