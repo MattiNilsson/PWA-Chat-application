@@ -19,6 +19,7 @@ import LogoIcon from "./components/LogoIcon/LogoIcon";
 
 function App() {
     const [context, setContext] = useState("");
+    
 
     useEffect(() => {
         if(localStorage.getItem("user") && !context){

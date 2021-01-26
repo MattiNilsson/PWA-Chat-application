@@ -7,6 +7,8 @@ import { URL } from "../../constants/constants";
 
 import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
 
+import {socket} from "../../socket/socket";
+
 export default function ChatPage(props){
     const { id } = useParams();
     const [message, setMessage] = useState("");
@@ -17,6 +19,30 @@ export default function ChatPage(props){
     const scrollToBottom = () => {
         chatRef.current.scrollIntoView()
     }
+
+    useEffect(() => {
+        socket.emit('join', JSON.stringify({room : id, user : context.username}), (msg, cb) => {
+            console.log('SOCKET HI')
+            console.log(msg);
+            console.log(cb);
+        })
+        console.log("hello?")
+
+        return function cleanup(){
+            socket.off("join")
+        }
+    }, [id, context]);
+
+    useEffect(() => {
+        socket.on('broad-message', data => {
+            console.log(data)
+        })
+        console.log("message")
+
+        return function cleanup(){
+            socket.off("broad-message")
+        }
+    }, [id, context]);
 
     useEffect(() => {
         axios
@@ -34,6 +60,9 @@ export default function ChatPage(props){
 
     const sendMessage = (e) => {
         e.preventDefault();
+
+
+
         axios
             .post(URL + "/messages", {
                 message : message,
@@ -46,6 +75,8 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {
+
+                socket.emit("message", JSON.stringify({user: context.username, id: id, message: message}))
                 setMessage("");
             })
             .catch(err => {
