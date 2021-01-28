@@ -1,0 +1,88 @@
+.wrap{
+    width: 50px !important;
+    height: 50px !important;
+    background-color: transparent;
+    border-radius:  50%;
+    border: 1px solid white;
+    position: relative;
+    animation: spinner 1s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+
+    div{
+        width: 9px;
+        height: 9px;
+        background-color: white;
+        border-radius: 50%;
+        transform: scale(1);
+    }
+
+    .t{
+        position: absolute;
+        top: 0;
+        left: 20px;
+    }
+
+    .tl{
+        position: absolute;
+        top: 6px;
+        left: 6px;
+    }
+
+    .l{
+        position: absolute;
+        left: 0;
+        top: 20px;
+    }
+
+    .bl{
+        position: absolute;
+        left: 6px;
+        bottom: 6px;
+    }
+
+    .b{
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+    }
+
+    .br{
+        position: absolute;
+        bottom: 6px;
+        right: 6px;
+    }
+
+    .r{
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+    }
+
+    .tr{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .center{
+        width: 30px;
+        height: 30px;
+        transform: scale(1);
+        animation: none;
+        border: 1px solid white;
+        background-color: transparent;
+    }
+}
+@keyframes spinner {
+    from{
+        transform: rotate(0deg)
+    }
+
+    to{
+        transform: rotate(720deg)
+    }
+}
+

@@ -1,0 +1,1 @@
+export const randomKey = () => {return Math.random() * (10^100 - 0) + 0}

@@ -4,8 +4,10 @@ import { useContext, useState, useEffect, useRef} from "react";
 import { useParams } from "react-router-dom"; 
 import {AccountContext} from "../../context/context"
 import { URL } from "../../constants/constants";
+import { randomKey } from "../../utils/utils";
 
 import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
+import LoadingSpinner from "../../mini-components/LoadingSpinner/LoadingSpinner"
 
 import {socket} from "../../socket/socket";
 
@@ -13,6 +15,7 @@ export default function ChatPage(props){
     const { id } = useParams();
     const [message, setMessage] = useState("");
     const [room, setRoom] = useState("");
+    const [render, setRender] = useState(false);
     const {context} = useContext(AccountContext);
     const chatRef = useRef(null)
 
@@ -21,10 +24,12 @@ export default function ChatPage(props){
     }
 
     useEffect(() => {
+        scrollToBottom();
+    })
+
+    useEffect(() => {
         socket.emit('join', JSON.stringify({room : id, user : context.username}), (msg, cb) => {
-            console.log('SOCKET HI')
-            console.log(msg);
-            console.log(cb);
+            console.log('connected')
         })
         console.log("hello?")
 
@@ -36,13 +41,14 @@ export default function ChatPage(props){
     useEffect(() => {
         socket.on('broad-message', data => {
             console.log(data)
+            setRender(!render);
         })
         console.log("message")
 
         return function cleanup(){
             socket.off("broad-message")
         }
-    }, [id, context]);
+    }, [id, context, render]);
 
     useEffect(() => {
         axios
@@ -56,29 +62,33 @@ export default function ChatPage(props){
                 scrollToBottom();
             })
             .catch(err => console.error(err))
-    }, [id])
+    }, [id, render])
 
     const sendMessage = (e) => {
         e.preventDefault();
+        if(!message) return;
 
-
+        const data = {
+            message : message,
+            author : context.username,
+            room : [+id],
+            user : [+context.id]
+        }
 
         axios
-            .post(URL + "/messages", {
-                message : message,
-                author : context.username,
-                room : [+id],
-                user : [+context.id]
-            }, {
+            .post(URL + "/messages", data, {
                 headers : {
                     'Authorization': "Bearer " + localStorage.getItem("jwt")
                 }
             })
             .then(res => {
-
-                socket.emit("message", JSON.stringify({user: context.username, id: id, message: message}))
+                let messages = room;
+                messages.messages.push(data)
+                setRoom(messages)
+                socket.emit("message", JSON.stringify(data))
                 setMessage("");
             })
+            .finally(() => scrollToBottom())
             .catch(err => {
                 console.log(err);
             })
@@ -91,24 +101,24 @@ export default function ChatPage(props){
     return(
         <div className="chat-container">
             <h1>{room ? room.users[0].username + ", " + room.users[1].username : ""}</h1>
-
             <div className="bouble-container">
                 {room ? room.messages.map((index) => {
                     return (
-                    <ChatBouble key={index.id} 
+                    <ChatBouble key={index.id ? index.id : randomKey()} 
                     image={
                         index.author === room.users[0].username ? room.users[0].profilepic.url : room.users[1].profilepic.url
                     }
                     self={
-                        index.author === room.users[0].username ? false : true
+                        index.author === context.username ? true : false
                     } 
                     data={index}
                     />
                     )
                 }) : <></>}
                 <div ref={chatRef}></div>
-            </div>
 
+            </div>
+                
             <form className="type-field" onSubmit={sendMessage}>
                 <input value={message} onChange={typing} type="text" />
                 <button type="submit" className="send"><Icon>send</Icon></button>

@@ -34,8 +34,8 @@ module.exports = async () => {
           const parsed = JSON.parse(data);
           console.log(data);
           console.log(parsed);
-          console.log(parsed.user + " send a message TO ROOM" + parsed.id)
-          socket.to(parsed.id).emit("broad-message", {user: parsed.user, msg : parsed.message})
+          console.log(parsed.author + " send a message TO ROOM " + parsed.room[0])
+          socket.to("" + parsed.room[0]).emit("broad-message", {author: parsed.author, message: parsed.message})
         })
   
         // listen for user diconnect

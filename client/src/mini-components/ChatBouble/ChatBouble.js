@@ -6,7 +6,7 @@ export default function ChatBouble(props){
 
     return(
         <div className={props.self ? "message-container self" : "message-container"}>
-            <img src={URL + props.image} alt="user"/>
+            <div className="img-contain"><img src={URL + props.image} alt="user"/></div>
             <p>{message}</p>
         </div>
     )
