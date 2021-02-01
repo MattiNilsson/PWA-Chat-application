@@ -9,6 +9,7 @@
 
 @import "../components/SideMenu/sidemenu.scss";
 @import "../components/LogoIcon/LogoIcon.scss";
+@import "../components/ChatImage/chatimage.scss";
 
 @import "../mini-components/SideMenuBtn/sidemenubutton.scss";
 @import "../mini-components/SearchAvatar/searchavatar.scss";
@@ -16,3 +17,5 @@
 @import "../mini-components/ChatBouble/chatbouble.scss";
 @import "../mini-components/LandingCard/landingcard.scss";
 @import "../mini-components/LoadingSpinner/loadingspinner.scss";
+
+@import "../components/modals/CreateRoom/createroom.scss"

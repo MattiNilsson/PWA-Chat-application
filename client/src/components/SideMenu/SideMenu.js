@@ -71,10 +71,10 @@ export default function SideMenu(){
                     return(
                         <SideMenuFriend
                             key={friend.id} 
-                            displayTo={friend.users[0].username === context.username ? friend.users[1].username : friend.users[0].username}
+                            displayTo={friend.title}
                             icon="home"
                             to={"/room/" + friend.id}
-                            profile={friend.users[0].username === context.username ? friend.users[1].profilepic.url :  friend.users[0].profilepic.url}
+                            profile={friend.roomimage.url}
                             setCloseHam={setHamburger}
                         />
                     )

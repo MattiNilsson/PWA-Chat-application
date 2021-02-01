@@ -1,0 +1,41 @@
+.image-field{
+    width: 100%;
+    position: absolute;
+    bottom: 62px;
+
+    .input-file {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .label-file{
+        color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 5px;
+        background-color: darken($primary-color, 10%);
+        cursor: pointer;
+        align-self: center;
+        text-align: right;
+        padding-left: 50px;
+        overflow: hidden;
+        margin-left: 0;
+        text-align: center;
+        position: relative;
+        font-size: 80%;
+        font-weight: bold;
+        span{
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            font-size: 220%;
+        }
+    }
+
+    .label-file:hover{
+        background-color: $primary-color;
+    }
+}

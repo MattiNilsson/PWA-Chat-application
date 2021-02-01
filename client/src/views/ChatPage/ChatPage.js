@@ -7,7 +7,7 @@ import { URL } from "../../constants/constants";
 import { randomKey } from "../../utils/utils";
 
 import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
-import LoadingSpinner from "../../mini-components/LoadingSpinner/LoadingSpinner"
+import ChatImage from "../../components/ChatImage/ChatImage"
 
 import {socket} from "../../socket/socket";
 
@@ -15,6 +15,7 @@ export default function ChatPage(props){
     const { id } = useParams();
     const [message, setMessage] = useState("");
     const [room, setRoom] = useState("");
+    const [file, setFile] = useState("");
     const [render, setRender] = useState(false);
     const {context} = useContext(AccountContext);
     const chatRef = useRef(null)
@@ -22,10 +23,6 @@ export default function ChatPage(props){
     const scrollToBottom = () => {
         chatRef.current.scrollIntoView()
     }
-
-    useEffect(() => {
-        scrollToBottom();
-    })
 
     useEffect(() => {
         socket.emit('join', JSON.stringify({room : id, user : context.username}), (msg, cb) => {
@@ -64,15 +61,22 @@ export default function ChatPage(props){
             .catch(err => console.error(err))
     }, [id, render])
 
+    useEffect(() => {
+        scrollToBottom();
+    })
+
     const sendMessage = (e) => {
         e.preventDefault();
-        if(!message) return;
+        if(!file){
+            if(!message) return;
+        }
 
         const data = {
             message : message,
             author : context.username,
             room : [+id],
-            user : [+context.id]
+            user : [+context.id],
+            userID : context.id
         }
 
         axios
@@ -82,13 +86,32 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {
+                return res.data.id
+            })
+            .then(refId => {
+                if(file){
+                    const formData = new FormData();
+                    formData.append('files', file);
+                    formData.append('refId', refId);            
+                    formData.append('ref', 'message');
+                    formData.append('field', 'image');
+                    return axios.post(URL + "/upload", formData)      
+                }    
+            })
+            .then(res => {
+                socket.emit("message", JSON.stringify(data))
                 let messages = room;
+                if(file){
+                    data.image = res.data[0]
+                }
                 messages.messages.push(data)
                 setRoom(messages)
-                socket.emit("message", JSON.stringify(data))
                 setMessage("");
+                setFile("");
             })
-            .finally(() => scrollToBottom())
+            .finally(() => {
+                scrollToBottom()
+            })
             .catch(err => {
                 console.log(err);
             })
@@ -100,13 +123,19 @@ export default function ChatPage(props){
 
     return(
         <div className="chat-container">
-            <h1>{room ? room.users[0].username + ", " + room.users[1].username : ""}</h1>
+            <h1>{room.title}</h1>
             <div className="bouble-container">
                 {room ? room.messages.map((index) => {
+                    let image = "";
+                    for(let i = 0; i < room.users.length; i++){
+                        if(index.userID === room.users[i].id){
+                            image = room.users[i].profilepic.url;
+                        }
+                    }
                     return (
                     <ChatBouble key={index.id ? index.id : randomKey()} 
                     image={
-                        index.author === room.users[0].username ? room.users[0].profilepic.url : room.users[1].profilepic.url
+                        image
                     }
                     self={
                         index.author === context.username ? true : false
@@ -118,7 +147,11 @@ export default function ChatPage(props){
                 <div ref={chatRef}></div>
 
             </div>
-                
+            
+            <ChatImage 
+                file={file}
+                setFile={setFile}
+            />
             <form className="type-field" onSubmit={sendMessage}>
                 <input value={message} onChange={typing} type="text" />
                 <button type="submit" className="send"><Icon>send</Icon></button>

@@ -39,6 +39,9 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "messages"
+    },
+    "userID": {
+      "type": "integer"
     }
   }
 }
