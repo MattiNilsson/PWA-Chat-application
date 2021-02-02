@@ -26,7 +26,7 @@ export default function SearchAvatar(props){
                     <img src={URL + profilepic.url} alt="user-avatar"/>
                 </div>
                 <h2>{firstname + " " + lastname}</h2>
-                <h3>( {username} )</h3>
+                <h3>{username}</h3>
             </div>
             <div className="icon-container">
                 <Link to={`/profile/${id}`} aria-label="user"><div><Icon>account_circle</Icon></div></Link>

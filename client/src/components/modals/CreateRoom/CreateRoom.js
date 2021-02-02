@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import { URL } from "../../../constants/constants"
 import {AccountContext} from "../../../context/context";
+import imageCompression from "browser-image-compression"
 
 export default function CreateRoom(props){
     const [file, setFile] = useState("");
@@ -12,7 +13,8 @@ export default function CreateRoom(props){
     const [newFriend, setNewFriend] = useState("");
     const [data, setData] = useState({
         title : "",
-        users : [+props.friendID, +context.id]
+        users : [+props.friendID, +context.id],
+        seen : [],
     })
 
     console.log(data.users)
@@ -51,9 +53,25 @@ export default function CreateRoom(props){
             })
     }
 
+    
+
     const onCreateRoom = async (e) => {
         e.preventDefault();
-        console.log(data);
+        let compressedFile;
+        console.log(data);        
+
+        if(file){
+            const options = {
+                maxSizeMB: 0.1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+    
+            compressedFile = await imageCompression(file, options);
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        }
+
         await axios
             .post(URL + "/rooms", data, {
                 headers : {
@@ -65,12 +83,14 @@ export default function CreateRoom(props){
                 return res.data.id;
             })
             .then((refId) => {
-                const formData = new FormData();
-                formData.append('files', file);
-                formData.append('refId', refId);            
-                formData.append('ref', 'room');
-                formData.append('field', 'roomimage');
-                return axios.post(URL + "/upload", formData)       
+                if(file){
+                    const formData = new FormData();
+                    formData.append('files', compressedFile);
+                    formData.append('refId', refId);            
+                    formData.append('ref', 'room');
+                    formData.append('field', 'roomimage');
+                    return axios.post(URL + "/upload", formData)   
+                }    
             })
             .then((res) => {
                 console.log(res)

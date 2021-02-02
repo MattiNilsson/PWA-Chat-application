@@ -18,8 +18,8 @@
       "dominant": true
     },
     "messages": {
-      "via": "room",
-      "collection": "message"
+      "collection": "message",
+      "via": "room"
     },
     "title": {
       "type": "string"
@@ -32,6 +32,9 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "seen": {
+      "type": "json"
     }
   }
 }

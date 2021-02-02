@@ -2,6 +2,8 @@ import {useState} from "react"
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 
+import imageCompression from 'browser-image-compression';
+
 import {Icon} from "@material-ui/core";
 
 import {URL} from "../../constants/constants"
@@ -35,6 +37,19 @@ export default function SignUpPage(props){
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
+        let compressedFile;
+
+        if(file){
+            const options = {
+                maxSizeMB: 0.1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+    
+            const compressedFile = await imageCompression(file, options);
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        }
         
         await axios
             .post(URL + "/users", data)
@@ -43,13 +58,15 @@ export default function SignUpPage(props){
                 return res.data.id;
             })
             .then((refId) => {
-                const formData = new FormData();
-                formData.append('files', file);
-                formData.append('refId', refId);            
-                formData.append('ref', 'user');
-                formData.append('source', 'users-permissions');
-                formData.append('field', 'profilepic');
-                return axios.post(URL + "/upload", formData)       
+                if(file){
+                    const formData = new FormData();
+                    formData.append('files', compressedFile);
+                    formData.append('refId', refId);            
+                    formData.append('ref', 'user');
+                    formData.append('source', 'users-permissions');
+                    formData.append('field', 'profilepic');
+                    return axios.post(URL + "/upload", formData)    
+                }   
             })
             .then((res) => {
                 setSuccess(true)

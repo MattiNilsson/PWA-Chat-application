@@ -1,3 +1,33 @@
+.mt-lmao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.search{
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    input{
+        width: 30vw;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        font-size: 120%;
+        padding-left: 15px;
+        outline: none;
+    }
+
+    span{
+        position: absolute;
+        right: 10px;
+        color: rgb(22, 22, 22);
+    }
+}
+
 .hp-items-container{
     width: 60vw;
     display: flex;
@@ -50,7 +80,6 @@
     .hp-items-container{
         width: 80vw;
         align-items: center;
-        position: absolute;
         left: 10vw;
 
         .ghost{
@@ -61,8 +90,17 @@
         }
     }
 
+    .search{
+        width: 60vw;
+        input{
+            width: 60vw;
+        }
+    }
+    
+
     .mt-lmao{
         margin-top: 50px;
+
     }
 }
 

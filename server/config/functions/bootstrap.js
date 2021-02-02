@@ -29,6 +29,14 @@ module.exports = async () => {
             socket.to(parsed.room).emit(parsed.user + " joined " + parsed.room);
             console.log(parsed.user + " JOINED " + parsed.room)
         })
+
+        socket.on("notify-join", (data) => {
+          let parsed = JSON.parse(data);
+          for(let i = 0; i < parsed.rooms.length; i++){
+            socket.join("" + parsed.rooms[i]);
+            console.log(parsed.user + " IS LISTENING TO " + parsed.rooms[i])
+          }
+        })
         
         socket.on("message", data => {
           const parsed = JSON.parse(data);
@@ -36,11 +44,16 @@ module.exports = async () => {
           console.log(parsed);
           console.log(parsed.author + " send a message TO ROOM " + parsed.room[0])
           socket.to("" + parsed.room[0]).emit("broad-message", {author: parsed.author, message: parsed.message})
+          socket.to("" + parsed.room[0]).emit("broad-notify", {author: parsed.author, message: parsed.message, room : parsed.room[0], roomName : parsed.roomname})
         })
   
         // listen for user diconnect
         socket.on('disconnect', () =>{
           console.log('a user disconnected')
+        });
+
+        socket.on('logoff', () =>{
+          console.log('a user logged off')
         });
       });
       strapi.io = io; // register socket io inside strapi main object to use it globally anywhere

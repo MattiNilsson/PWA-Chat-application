@@ -3,7 +3,7 @@ import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 // Context
-import {AccountContext} from "./context/context"
+import {AccountContext} from "./context/context";
 
 // Views
 import HomePage from "./views/HomePage/HomePage";

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import {AccountContext} from "../../context/context"
 import { URL } from "../../constants/constants";
 import { randomKey } from "../../utils/utils";
+import imageCompression from "browser-image-compression";
 
 import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
 import ChatImage from "../../components/ChatImage/ChatImage"
@@ -57,15 +58,28 @@ export default function ChatPage(props){
             .then(res => {
                 setRoom(res.data);
                 scrollToBottom();
+                if(!res.data.seen.includes(+context.id)){
+                    let iveSeen = [...res.data.seen];
+                    iveSeen.push(+context.id);
+
+                    axios
+                        .put(URL + "/rooms/" + id, {seen : iveSeen}, {
+                            headers : {
+                                'Authorization': "Bearer " + localStorage.getItem("jwt")
+                            }
+                        })
+                }
             })
             .catch(err => console.error(err))
-    }, [id, render])
+    }, [context.id, id, render])
 
     useEffect(() => {
         scrollToBottom();
     })
 
-    const sendMessage = (e) => {
+    const sendMessage = async (e) => {
+        let compressedFile;
+
         e.preventDefault();
         if(!file){
             if(!message) return;
@@ -77,9 +91,30 @@ export default function ChatPage(props){
             room : [+id],
             user : [+context.id],
             userID : context.id
+        }        
+
+        if(file){
+            const options = {
+                maxSizeMB: 0.1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+    
+            compressedFile = await imageCompression(file, options);
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
         }
 
-        axios
+        await axios
+            .put(URL + "/rooms/" + id, {seen : [context.id]} ,{
+                headers : {
+                    'Authorization': "Bearer " + localStorage.getItem("jwt")
+                }
+            })
+            .then(res => {console.log(res)})
+            .catch(err => console.err(err))
+
+        await axios
             .post(URL + "/messages", data, {
                 headers : {
                     'Authorization': "Bearer " + localStorage.getItem("jwt")
@@ -91,7 +126,7 @@ export default function ChatPage(props){
             .then(refId => {
                 if(file){
                     const formData = new FormData();
-                    formData.append('files', file);
+                    formData.append('files', compressedFile);
                     formData.append('refId', refId);            
                     formData.append('ref', 'message');
                     formData.append('field', 'image');
@@ -99,7 +134,7 @@ export default function ChatPage(props){
                 }    
             })
             .then(res => {
-                socket.emit("message", JSON.stringify(data))
+                data.roomname = room.title
                 let messages = room;
                 if(file){
                     data.image = res.data[0]
@@ -111,6 +146,7 @@ export default function ChatPage(props){
             })
             .finally(() => {
                 scrollToBottom()
+                socket.emit("message", JSON.stringify(data))
             })
             .catch(err => {
                 console.log(err);

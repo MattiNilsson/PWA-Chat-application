@@ -8,6 +8,7 @@
 * react-router-dom
 * react-scroll
 * react-linkify
+* browser-image-compression
 
 ##### Styling
 

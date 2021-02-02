@@ -3,14 +3,19 @@ import { useState, useContext, useEffect } from "react";
 import {URL} from "../../constants/constants";
 import {AccountContext} from "../../context/context";
 import { Icon } from "@material-ui/core";
+import { v4 as uuidv4 } from "uuid";
 
 import SideMenuButton from "../../mini-components/SideMenuBtn/SideMenuBtn";
 import SideMenuFriend from "../../mini-components/SideMenuFriend/SideMenuFriend";
 
+import {socket} from "../../socket/socket";
+
 export default function SideMenu(){
     const {context, setContext} = useContext(AccountContext);
+
     const [friends, setFriends] = useState([]);
     const [hamburger, setHamburger] = useState(false);
+    const [note, setNote] = useState("");
 
     useEffect(() => {
         const getRooms = () =>{
@@ -28,7 +33,32 @@ export default function SideMenu(){
         }
 
         getRooms();
-    }, [context])
+    }, [context, note])
+
+    useEffect(() => {
+        let myRooms = [];
+        for(let i = 0; i < friends.length; i++){
+            myRooms.push(friends[i].id);
+        }
+
+        socket.emit('notify-join', JSON.stringify({rooms : myRooms, user : context.username}), (msg, cb) => {
+            console.log('connected')
+        })
+
+        return(() => {
+            socket.off('notify-join');
+        })
+    }, [friends, context])
+
+    useEffect(() => {
+        socket.on('broad-notify', data => {
+            setNote(data);
+        })
+
+        return function cleanup(){
+            socket.off("broad-notify")
+        }
+    }, [note]);
 
     const onLogOut = (e) => {
         setContext(null);
@@ -70,12 +100,14 @@ export default function SideMenu(){
                 {context ? friends.map((friend) => {
                     return(
                         <SideMenuFriend
-                            key={friend.id} 
+                            key={uuidv4()} 
                             displayTo={friend.title}
                             icon="home"
                             to={"/room/" + friend.id}
                             profile={friend.roomimage.url}
                             setCloseHam={setHamburger}
+                            notify={note.room === friend.id ? note : false}
+                            seen={friend.seen.includes(context.id) ? true : false}
                         />
                     )
                 }) : <></>}
@@ -105,7 +137,7 @@ export default function SideMenu(){
                     />
                     </>
                 }
-            </div>  
+            </div>
         </aside>
     )
 }

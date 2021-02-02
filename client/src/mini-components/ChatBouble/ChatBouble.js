@@ -4,7 +4,7 @@ import Linkify from "react-linkify"
 import {useRef, useState, useEffect} from "react";
 
 export default function ChatBouble(props){
-    const {message, image} = props.data;
+    const {message, author, image} = props.data;
     const [full, setFull] = useState(false);
     const myRef = useRef(null);
 
@@ -33,6 +33,7 @@ export default function ChatBouble(props){
             <div className={full ? "sent-full" : "sent-image"}>
                 {image ? <img ref={myRef} onClick={fullscreen} src={image.url} alt="message" /> : ""}
             </div>
+            <p className="author">{author}</p>
         </div>
     )
 }

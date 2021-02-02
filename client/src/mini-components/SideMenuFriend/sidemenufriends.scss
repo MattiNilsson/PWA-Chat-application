@@ -42,6 +42,19 @@
         position: absolute;
         right: 5px;
     }
+    .orb{
+        position: absolute;
+        right: 5px;
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0;
+
+        &.hide{
+            display:none;
+        }
+    }
 
     &:hover{
         transition: 0s linear all;
@@ -52,6 +65,67 @@
     &:active{
         background-color: darken($primary-color, 10%);
         border-color: darken($primary-color, 10%);
+    }
+}
+
+.sidemenu-wrap{
+    position: relative;
+}
+
+.note{
+    position: fixed;
+    bottom: 10px;
+    left: 30vw;
+    width: 40vw;
+    height: 40px;
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.8;
+    animation: fadeinout 3s forwards;
+
+    .message{
+        color: black;
+        padding-left: 125px;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 30vw;
+
+        &.image{
+            font-weight: bold;
+            color: $hover-color;
+        }
+    }
+
+    .name{
+        font-weight: bold;
+        color: $hover-color;
+        margin-left: 5px;
+
+        .author{
+            color: rgb(5, 114, 2);
+        }
+    }
+}
+
+@keyframes fadeinout{
+    0%{
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
     }
 }
 
@@ -67,10 +141,22 @@
             width: 40px;
             height: 40px;
             left: 5px;
+            img{
+                width: 100px;
+            }
         }   
 
         h2{
             margin-left: 55px;
         }
+
+        .orb{
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .note{
+        display: none;
     }
 }
