@@ -1,6 +1,6 @@
 import {useState} from "react"
 import axios from "axios";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 
 import imageCompression from 'browser-image-compression';
 
@@ -80,7 +80,7 @@ export default function SignUpPage(props){
             <h1>Create Account</h1>
             <form onSubmit={onSubmitForm}>
                 <label htmlFor="email">Email</label>
-                <input onChange={onChangeForm} type="email" id="email"/>
+                <input onChange={onChangeForm} type="email" id="email" placeholder="something@email.com ..."/>
                 <label htmlFor="username">Username</label>
                 <input onChange={onChangeForm} autoComplete="username" type="text" id="username"/>
                 <label htmlFor="firstname">Firstname</label>
@@ -88,7 +88,7 @@ export default function SignUpPage(props){
                 <label htmlFor="firstname">Lastname</label>
                 <input onChange={onChangeForm} autoComplete="lastname" type="text" id="lastname"/>
                 <label htmlFor="email">Password</label>
-                <input onChange={onChangeForm} autoComplete="current-password" type="password" id="password"/>
+                <input onChange={onChangeForm} minLength="8" autoComplete="current-password" type="password" id="password"/>
                 <label 
                     htmlFor="profilepic" 
                     className="label-file"
@@ -99,6 +99,7 @@ export default function SignUpPage(props){
                 <input onChange={onChangeFile} className="input-file" type="file" id="profilepic" alt="image"/>
                 <button type="submit">Sign Up</button>
             </form>
+            <Link to="/login">Already Have An Account? Sign In!</Link>
         </div>
     )
 }

@@ -36,18 +36,20 @@ export default function SideMenu(){
     }, [context, note])
 
     useEffect(() => {
-        let myRooms = [];
-        for(let i = 0; i < friends.length; i++){
-            myRooms.push(friends[i].id);
+        if(context){
+            let myRooms = [];
+            for(let i = 0; i < friends.length; i++){
+                myRooms.push(friends[i].id);
+            }
+
+            socket.emit('notify-join', JSON.stringify({rooms : myRooms, user : context.username}), (msg, cb) => {
+                console.log('connected')
+            })
+
+            return(() => {
+                socket.off('notify-join');
+            })
         }
-
-        socket.emit('notify-join', JSON.stringify({rooms : myRooms, user : context.username}), (msg, cb) => {
-            console.log('connected')
-        })
-
-        return(() => {
-            socket.off('notify-join');
-        })
     }, [friends, context])
 
     useEffect(() => {

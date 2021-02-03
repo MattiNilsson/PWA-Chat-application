@@ -4,6 +4,8 @@ import {AccountContext} from "../../context/context";
 import { Redirect } from "react-router-dom" ;
 import { useContext } from "react";
 
+import backdrop from "../../assets/Backdrop.svg";
+
 export default function LandingPage(){
     const {context} = useContext(AccountContext);
     console.log(context);
@@ -13,6 +15,7 @@ export default function LandingPage(){
 
     return(
         <article className="land-container">
+            <img className="backdrop top" src={backdrop} alt="backdrop" />
             <img src={logo} alt="company-logo"/>
             <section>
                 <h1>Welcome to BiteChat!</h1>
@@ -23,6 +26,7 @@ export default function LandingPage(){
                 <LandingCard purpose="Create Account" icon="person_add" to="/signup" desc="Create an account here!"/>
                 <LandingCard purpose="Login" icon="login" to="/login" desc="If you have an account login here!"/>
             </div>
+            <img className="backdrop" src={backdrop} alt="backdrop" />
         </article>
     )
 }

@@ -1,8 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import {URL} from "../../constants/constants";
-
-import {AccountContext} from "../../context/context";
 
 import { Link } from "react-router-dom";
 import { Icon } from "@material-ui/core";
@@ -10,7 +8,6 @@ import { Icon } from "@material-ui/core";
 import CreateRoom from "../../components/modals/CreateRoom/CreateRoom";
 
 export default function SearchAvatar(props){
-    const {context} = useContext(AccountContext);
     const {firstname, lastname, profilepic, username, id} = props.user;
     const [modal, setModal] = useState(false);
 

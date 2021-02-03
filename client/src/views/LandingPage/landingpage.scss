@@ -6,21 +6,38 @@
     flex-direction: column;
     margin-top: 20px;
     border-radius: 10px;
+    position: relative;
+
+    .backdrop{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 5;
+        border-radius: 0 0 8px 8px;
+
+        &.top{
+            top: 0;
+            bottom: auto;
+            transform: rotateX(180deg);
+            transform: rotateZ(180deg);
+        }
+    }
     
     section{
         width: 70%;
         text-align: left;
+        z-index: 11;
     }
     
     img{
         width: 150px;
+        z-index: 10;
     }
     h1{
         font-size: 150%;
     }
     p{
-        font-size: 120%;
-        
+        font-size: 120%;    
     }
 
     button{
@@ -48,6 +65,7 @@
         display: flex;
         justify-content: space-between;
         width: 70%;
+        z-index: 10;
     }
 }
 
@@ -60,8 +78,12 @@
 @media(max-width: 600px){
     .land-container{
         width: 100%;
-        margin-top: 60px;
+        margin-top: 50px;
         border-radius: 0;
+
+        .backdrop{
+            border-radius: 0;
+        }
     }
 
     .card-container{

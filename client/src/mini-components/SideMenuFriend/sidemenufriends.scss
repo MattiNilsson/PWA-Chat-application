@@ -90,12 +90,12 @@
 
     .message{
         color: black;
-        padding-left: 125px;
         padding-right: 10px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        max-width: 30vw;
+        text-align: right;
+        width: 20vw;
 
         &.image{
             font-weight: bold;
@@ -107,6 +107,7 @@
         font-weight: bold;
         color: $hover-color;
         margin-left: 5px;
+        width: 20vw;
 
         .author{
             color: rgb(5, 114, 2);
@@ -153,6 +154,10 @@
         .orb{
             width: 40px;
             height: 40px;
+
+            &.hide{
+                display:none;
+            }
         }
     }
 

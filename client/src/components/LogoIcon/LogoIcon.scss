@@ -10,22 +10,13 @@
         right: 20px;
         transform: rotate(0deg);
         transition: all 0.2s ease-out;
-        
+        border-radius: 50%;
+        background-color: $secondary-color;
+        cursor: pointer;
+
         &:hover{
             transform: rotate(10deg);
         }
-    }
-
-    div{
-        width: 400px;
-        height: 200px;
-        border-radius: 50px;
-        background-color: $secondary-color;
-        position: absolute;
-        top: 40px;
-        right: -250px;
-        z-index: -1;
-        transform: rotate(45deg);
     }
 }
 

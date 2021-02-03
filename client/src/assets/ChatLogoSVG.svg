@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px"
+	 height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<g id="Layer_2">
+	<path fill="#068B97" stroke="#068B97" stroke-width="30" stroke-miterlimit="10" d="M907.07,496.34c0,4.6-0.08,9.17-0.23,13.73
+		C851.09,440.85,754,328,754,328L555,611l-333.2,38.22c0,0,46.55,130.271,75.51,203.061C173.3,782.11,89.61,649,89.61,496.34
+		c0-225.74,183-408.73,408.73-408.73C724.08,87.61,907.07,270.6,907.07,496.34z"/>
+	<path fill="#066C77" stroke="#066C77" stroke-width="30" stroke-miterlimit="10" d="M906.84,510.07
+		c3.66,221.93-187.359,395-408.5,395c-73.07,0-138.34-12.07-201.03-52.79C268.35,779.49,221.8,649.22,221.8,649.22L555,611l199-283
+		C754,328,851.09,440.85,906.84,510.07z"/>
+</g>
+<g id="Layer_4" display="none">
+	<path display="inline" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" d="M754,325
+		c0,0,188.63,219.235,191,234c38.061,237.08-322.125,519.165-626,338c-9.626-5.739-97.204-250.779-97.204-250.779L555,608L754,325z"
+		/>
+</g>
+<g id="Layer_5">
+	<polygon fill="#066C77" stroke="#066C77" stroke-width="30" stroke-miterlimit="10" points="226,422 300.902,598.292 
+		522.902,590.292 601.667,531.166 504.333,480.5 	"/>
+	<polygon fill="#066C77" stroke="#066C77" stroke-width="30" stroke-miterlimit="10" points="480.333,410.333 597.667,500 
+		667,428.333 643.667,344.333 547.667,328 495,388.333 	"/>
+</g>
+<g id="Layer_1" display="none">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="496.5732" y1="322.5293" x2="498.9329" y2="743.1184">
+		<stop  offset="0" style="stop-color:#CCE0F4"/>
+		<stop  offset="0.0641" style="stop-color:#C3DCF2"/>
+		<stop  offset="0.1706" style="stop-color:#A9D2EE"/>
+		<stop  offset="0.3066" style="stop-color:#80C2E7"/>
+		<stop  offset="0.4649" style="stop-color:#47ACDE"/>
+		<stop  offset="0.5674" style="stop-color:#1E9CD7"/>
+		<stop  offset="0.8652" style="stop-color:#0075BE"/>
+		<stop  offset="0.9944" style="stop-color:#005B97"/>
+	</linearGradient>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="496.4893" y1="307.5298" x2="499.0179" y2="758.2581">
+		<stop  offset="0" style="stop-color:#4DBBF4"/>
+		<stop  offset="0.0607" style="stop-color:#4BB2F3"/>
+		<stop  offset="0.1617" style="stop-color:#4498EF"/>
+		<stop  offset="0.2905" style="stop-color:#3A6FE8"/>
+		<stop  offset="0.4404" style="stop-color:#2C36DF"/>
+		<stop  offset="0.5674" style="stop-color:#1E00D7"/>
+		<stop  offset="0.8652" style="stop-color:#000BBE"/>
+		<stop  offset="0.9944" style="stop-color:#003697"/>
+	</linearGradient>
+	<path display="inline" fill="url(#SVGID_1_)" stroke="url(#SVGID_2_)" stroke-width="30" stroke-miterlimit="10" d="M771,640.563
+		c0,5.788-4.019,10.437-9.808,10.437h-56.485c2.621,55,21.547,90.843,21.547,90.843C617.94,741.843,589.19,651,589.19,651H234.482
+		c-5.79,0-10.482-4.648-10.482-10.437v-56.775V544.48l51.536,45.422l26.787-27.078l27.301,18.774l133.711-20.521l82.98-88.223
+		l-86.475,16.596l-167.708-31.445l-27.515,36.25L224,459.17V334.844c0-5.789,4.692-10.844,10.482-10.844h526.71
+		c5.789,0,9.808,5.055,9.808,10.844V640.563z"/>
+</g>
+<g id="Layer_3">
+	<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="30" stroke-miterlimit="10" d="M752.19,318H225.48
+		c-5.79,0-10.48,5.06-10.48,10.84v89.494l47.057,61.445l21.073-27.769l101.204,54.323L552,496.338L454.5,589.5L347,595.667
+		l-53.68-38.847l-24.986,58.847L215,538.48v96.079c0,5.79,4.69,10.44,10.48,10.44h354.71c0,0,28.75,90.84,137.06,90.84
+		c0,0-18.92-35.84-21.54-90.84h56.48c5.79,0,9.81-4.65,9.81-10.44V328.84C762,323.06,757.98,318,752.19,318z M554.046,339.886
+		c38.309,0,69.367,31.06,69.367,69.367c0,38.308-31.059,69.367-69.367,69.367c-38.306,0-69.366-31.059-69.366-69.367
+		L554.046,339.886z"/>
+</g>
+</svg>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useState, useContext} from "react";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import {AccountContext} from "../../context/context";
 
 import { URL } from "../../constants/constants";
@@ -53,6 +53,7 @@ export default function LoginPage(){
                 <input onChange={onChangeForm} autoComplete="current-password" type="password" id="password"/>
                 <button type="submit">Login</button>
             </form>
+            <Link to="/signup">Do Not Have An Account? Sign Up!</Link>
         </div>
     )
 }
