@@ -12,6 +12,7 @@
 
 module.exports = async () => {
     process.nextTick(() =>{
+
       var io = require('socket.io')(strapi.server, {
         cors: {
             origin: "http://localhost:3000",

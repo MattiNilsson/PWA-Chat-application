@@ -53,14 +53,16 @@ export default function SideMenu(){
     }, [friends, context])
 
     useEffect(() => {
-        socket.on('broad-notify', data => {
-            setNote(data);
-        })
-
-        return function cleanup(){
-            socket.off("broad-notify")
+        if(context){
+            socket.on('broad-notify', data => {
+                setNote(data);
+            })
+    
+            return function cleanup(){
+                socket.off("broad-notify")
+            }
         }
-    }, [note]);
+    }, [note, context]);
 
     const onLogOut = (e) => {
         setContext(null);

@@ -16,6 +16,7 @@ export default function ChatPage(props){
     const { id } = useParams();
     const [message, setMessage] = useState("");
     const [room, setRoom] = useState("");
+    const [offline, setOffline] = useState(false);
     const [file, setFile] = useState("");
     const [render, setRender] = useState(false);
     const {context} = useContext(AccountContext);
@@ -70,7 +71,9 @@ export default function ChatPage(props){
                         })
                 }
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                setOffline(true);
+            })
     }, [context.id, id, render])
 
     useEffect(() => {
@@ -148,9 +151,7 @@ export default function ChatPage(props){
                 scrollToBottom()
                 socket.emit("message", JSON.stringify(data))
             })
-            .catch(err => {
-                console.log(err);
-            })
+            .catch(err => {})
     }
 
     const typing = (e) => {
@@ -161,7 +162,7 @@ export default function ChatPage(props){
         <div className="chat-container">
             <h1>{room.title}</h1>
             <div className="bouble-container">
-                {room ? room.messages.map((index) => {
+                {room && !offline ? room.messages.map((index) => {
                     let image = "";
                     for(let i = 0; i < room.users.length; i++){
                         if(index.userID === room.users[i].id){

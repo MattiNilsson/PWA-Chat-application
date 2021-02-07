@@ -44,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:1337"
+  "proxy": "http://localhost:1337",
+  "devDependencies": {
+    "workbox-build": "^6.1.0"
+  }
 }
