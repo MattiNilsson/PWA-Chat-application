@@ -46,7 +46,7 @@ export default function SignUpPage(props){
                 useWebWorker: true,
             }
     
-            const compressedFile = await imageCompression(file, options);
+            compressedFile = await imageCompression(file, options);
             console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
             console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
         }

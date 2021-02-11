@@ -1,5 +1,6 @@
+
 /* eslint-disable no-restricted-globals */
-const version = 8;
+const version = 5;
 const staticCache = "appV" + version;
 const dynamicCache = "dynamicV" + version;
 
@@ -27,8 +28,8 @@ self.addEventListener("install", (e) => {
     console.log("Service worker has been installed")
 })
 
+self.addEventListener("activate", async (e) => {
 
-self.addEventListener("activate", (e) => {
     // Deleting old caches depending on the version 
     e.waitUntil(
         caches.keys().then((keys) => {
@@ -39,6 +40,37 @@ self.addEventListener("activate", (e) => {
         )
     )
     console.log("service worker has been activated")
+
+})
+
+self.addEventListener("push", e => {
+    const data = e.data.json();
+    console.log(data);
+    self.registration.showNotification(data.author + " - " + data.roomname, {
+        body: data.message,
+        data: {
+            url: data.url
+        },
+        tag: "new-message-" + data.roomname,
+        renotify: false,
+    })
+})
+
+const notifyRoute = async e => {
+    let { url } = e.notification.data
+    let clis = await self.clients.matchAll()
+    let client = clis.find(c => c.visibilityState === 'visible')
+    if(client !== undefined) {
+        client.navigate(url)
+        client.focus()
+    } else {
+        self.clients.openWindow(url)
+    }
+    e.notification.close()
+}
+  
+self.addEventListener('notificationclick', e => {
+    e.waitUntil(notifyRoute(e))
 })
 
 // cache size limit function
@@ -52,19 +84,13 @@ const limitCacheSize = (name, size) => {
     })
 }
 
-self.addEventListener("push", e => {
-    const data = e.data.json();
-    console.log(data);
-    self.registration.showNotification(data.title, {
-        body:"TEST NOTIFY",
-    })
-})
-
 self.addEventListener("fetch", (e) => {
 
-    if (e.request.method !== "GET") return
-    if (e.request.url.includes("/socket.io")) return
-    if (e.request.url.includes("localhost:1337")) return
+    // kör network first när det gäller att ladda in rooms
+    if (e.request.method !== "GET" ||
+        e.request.url.includes("/socket.io") ||
+        e.request.url.includes("/rooms/")) return
+    
     e.respondWith(
         caches.match(e.request).then(cacheRes => {
             return cacheRes || fetch(e.request).then(fetchRes => {

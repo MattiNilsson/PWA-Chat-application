@@ -81,6 +81,10 @@
     "messages": {
       "via": "user",
       "collection": "message"
+    },
+    "subscription": {
+      "via": "user",
+      "model": "subscriptions"
     }
   }
 }

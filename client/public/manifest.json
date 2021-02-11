@@ -10,7 +10,8 @@
     {
       "src": "icons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose" : "maskable"
     },
     {
       "src": "icons/favicon-16x16.png",
@@ -23,7 +24,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#068B97",

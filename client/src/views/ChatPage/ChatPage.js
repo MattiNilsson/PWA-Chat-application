@@ -93,7 +93,7 @@ export default function ChatPage(props){
             author : context.username,
             room : [+id],
             user : [+context.id],
-            userID : context.id
+            userID : context.id,
         }        
 
         if(file){
@@ -138,6 +138,8 @@ export default function ChatPage(props){
             })
             .then(res => {
                 data.roomname = room.title
+                data.otherUsers = room.users
+                data.url = window.location.origin + "/room/" + data.room[0];
                 let messages = room;
                 if(file){
                     data.image = res.data[0]
