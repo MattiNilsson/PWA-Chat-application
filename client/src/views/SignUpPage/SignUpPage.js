@@ -4,6 +4,8 @@ import {Redirect, Link} from "react-router-dom";
 
 import imageCompression from 'browser-image-compression';
 
+import LoadingSpinner from "../../mini-components/LoadingSpinner/LoadingSpinner";
+
 import {Icon} from "@material-ui/core";
 
 import {URL} from "../../constants/constants"
@@ -18,6 +20,8 @@ export default function SignUpPage(props){
     })
     const [file, setFile] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState(false);
 
     if(success){
         return(
@@ -38,7 +42,7 @@ export default function SignUpPage(props){
     const onSubmitForm = async (e) => {
         e.preventDefault();
         let compressedFile;
-
+        setLoading(true);
         if(file){
             const options = {
                 maxSizeMB: 0.1,
@@ -49,6 +53,10 @@ export default function SignUpPage(props){
             compressedFile = await imageCompression(file, options);
             console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
             console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        }else{
+            setErr(true);
+            setLoading(false);
+            return;
         }
         
         await axios
@@ -71,13 +79,19 @@ export default function SignUpPage(props){
             .then((res) => {
                 setSuccess(true)
                 console.log(res)
+                setLoading(false);
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                setErr(true);
+                setLoading(false);
+            })
     }
     console.log(file);
     return(
         <div className="sign-container">
             <h1>Create Account</h1>
+            {err ? <p className="err">you need a picture!</p> : ""}
             <form onSubmit={onSubmitForm}>
                 <label htmlFor="email">Email</label>
                 <input onChange={onChangeForm} type="email" id="email" placeholder="something@email.com ..."/>
@@ -100,6 +114,7 @@ export default function SignUpPage(props){
                 <button type="submit">Sign Up</button>
             </form>
             <Link to="/login">Already Have An Account? Sign In!</Link>
+            {loading ? <LoadingSpinner /> : ""}
         </div>
     )
 }

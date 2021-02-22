@@ -107,6 +107,14 @@
     }
 }
 
+.err{
+    color: rgb(216, 80, 80);
+    font-size: 120%;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
 @media(max-width : 1000px){
     .sign-container{
         width: 70vw;

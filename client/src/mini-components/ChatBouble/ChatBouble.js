@@ -31,7 +31,7 @@ export default function ChatBouble(props){
             <div className="img-contain"><img className="avatar" src={URL + props.image} alt="user"/></div>
             <Linkify><p>{message}</p></Linkify>
             <div className={full ? "sent-full" : "sent-image"}>
-                {image ? <img ref={myRef} onClick={fullscreen} src={image.url} alt="message" /> : ""}
+                {image ? <img ref={myRef} onClick={fullscreen} src={URL + image.url} alt="message" /> : ""}
             </div>
             <p className="author">{author}</p>
         </div>

@@ -89,7 +89,7 @@ self.addEventListener("fetch", (e) => {
     if (e.request.method !== "GET"              ||
         e.request.url.includes("/socket.io")    ||
         e.request.url.includes("/rooms/")       ||
-        e.request.url.includes("localhost:1337")) return
+        e.request.url.includes("https://bitechat-pwa.herokuapp.com")) return
     
     e.respondWith(
         caches.match(e.request).then(cacheRes => {

@@ -13,7 +13,7 @@ const urlB64ToUint8Array = base64String => {
 }
 
 const saveSubscription = async subscription => {
-    const SERVER_URL = 'https://pwa-bitechat.herokuapp.com/subscriptions'
+    const SERVER_URL = 'https://bitechat-pwa.herokuapp.com/subscriptions'
     const userID = JSON.parse(localStorage.getItem("user"));
     console.log(userID.id)
     const response = await fetch(SERVER_URL, {

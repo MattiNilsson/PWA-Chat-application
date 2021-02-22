@@ -10,6 +10,8 @@ import imageCompression from "browser-image-compression";
 import ChatBouble from "../../mini-components/ChatBouble/ChatBouble"
 import ChatImage from "../../components/ChatImage/ChatImage"
 
+import LoadingSpinner from "../../mini-components/LoadingSpinner/LoadingSpinner";
+
 import {socket} from "../../socket/socket";
 
 export default function ChatPage(props){
@@ -19,6 +21,7 @@ export default function ChatPage(props){
     const [offline, setOffline] = useState(false);
     const [file, setFile] = useState("");
     const [render, setRender] = useState(false);
+    const [loading, setLoading] = useState(false);
     const {context} = useContext(AccountContext);
     const chatRef = useRef(null)
 
@@ -82,10 +85,14 @@ export default function ChatPage(props){
 
     const sendMessage = async (e) => {
         let compressedFile;
+        setLoading(true);
 
         e.preventDefault();
         if(!file){
-            if(!message) return;
+            if(!message) {
+                setLoading(false);
+                return
+            };
         }
 
         const data = {
@@ -115,7 +122,10 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {console.log(res)})
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                setLoading(false);
+            })
 
         await axios
             .post(URL + "/messages", data, {
@@ -152,8 +162,9 @@ export default function ChatPage(props){
             .finally(() => {
                 scrollToBottom()
                 socket.emit("message", JSON.stringify(data))
+                setLoading(false);
             })
-            .catch(err => {})
+            .catch(err => { setLoading(false) })
     }
 
     const typing = (e) => {
@@ -195,6 +206,7 @@ export default function ChatPage(props){
                 <input value={message} onChange={typing} type="text" />
                 <button type="submit" className="send"><Icon>send</Icon></button>
             </form>
+            {loading ? <LoadingSpinner /> : ""}
         </div>
     )
 }
