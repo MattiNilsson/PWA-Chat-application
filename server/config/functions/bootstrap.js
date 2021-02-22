@@ -20,7 +20,7 @@ module.exports = async () => {
 
       var io = require('socket.io')(strapi.server, {
         cors: {
-            origin: "http://localhost:3000",
+            origin: "*",
             methods: ["GET", "POST", "DELETE", "PUT"],
             allowedHeaders: ["my-custom-header"],
             credentials: true

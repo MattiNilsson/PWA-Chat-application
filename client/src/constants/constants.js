@@ -1,2 +1,2 @@
-export const URL = "http://localhost:1337"
+export const URL = "https://pwa-bitechat.herokuapp.com"
 

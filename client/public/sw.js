@@ -1,6 +1,5 @@
-
 /* eslint-disable no-restricted-globals */
-const version = 5;
+const version = 6;
 const staticCache = "appV" + version;
 const dynamicCache = "dynamicV" + version;
 
@@ -87,9 +86,10 @@ const limitCacheSize = (name, size) => {
 self.addEventListener("fetch", (e) => {
 
     // kör network first när det gäller att ladda in rooms
-    if (e.request.method !== "GET" ||
-        e.request.url.includes("/socket.io") ||
-        e.request.url.includes("/rooms/")) return
+    if (e.request.method !== "GET"              ||
+        e.request.url.includes("/socket.io")    ||
+        e.request.url.includes("/rooms/")       ||
+        e.request.url.includes("localhost:1337")) return
     
     e.respondWith(
         caches.match(e.request).then(cacheRes => {

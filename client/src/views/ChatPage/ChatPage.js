@@ -115,7 +115,7 @@ export default function ChatPage(props){
                 }
             })
             .then(res => {console.log(res)})
-            .catch(err => console.err(err))
+            .catch(err => console.error(err))
 
         await axios
             .post(URL + "/messages", data, {
